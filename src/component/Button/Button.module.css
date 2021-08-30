@@ -1,0 +1,14 @@
+.button {
+    background-color: #61dafb;
+    color: #282c34;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    font-size: 30px;
+}
+
+.button:disabled {
+    opacity: 0.5;
+}
+
+

@@ -1,0 +1,16 @@
+.buttons {
+    margin: 20px 0 0 0;
+    border: 2px solid cornflowerblue;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper {
+    border: 2px solid cornflowerblue;
+    border-radius: 20px;
+    padding: 20px;
+    width: 400px;
+    margin-bottom: 20px;
+}

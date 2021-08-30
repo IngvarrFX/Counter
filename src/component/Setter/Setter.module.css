@@ -1,0 +1,44 @@
+.redMax {
+    background-color: lightpink;
+}
+
+.redMin {
+    background-color: lightpink;
+}
+
+.button {
+    background-color: #61dafb;
+    color: #282c34;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    font-size: 30px;
+    margin: auto;
+}
+
+.button:disabled {
+    opacity: 0.5;
+}
+
+.buttons {
+    margin: 20px 0 0 0;
+    border: 2px solid cornflowerblue;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper {
+    border: 2px solid cornflowerblue;
+    border-radius: 20px;
+    padding: 20px;
+    width: 400px;
+    color: #61dafb;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper div {
+    margin: 10px;
+}
