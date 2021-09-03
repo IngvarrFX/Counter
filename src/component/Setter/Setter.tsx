@@ -10,10 +10,11 @@ type SetterPropsType = {
     startValue: number
     setMin: (min: number) => void
     setCounter: (value: number) => void
+    setRender: (value: boolean) => void
 }
 
 export const Setter = (props: SetterPropsType) => {
-    let [dis, setDis]= useState(false)
+    let [dis, setDis] = useState(false)
 
     const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.setMax(Number(e.currentTarget.value))
@@ -27,30 +28,33 @@ export const Setter = (props: SetterPropsType) => {
     const setNumber = () => {
         props.setMax(props.maxValue)
         props.setCounter(props.startValue)
+        props.setRender(true)
     }
 
     const disableToggle = () => {
-        if(props.maxValue < 0 || props.maxValue === props.startValue || props.startValue < 0){
+        if (props.maxValue < 0 || props.maxValue === props.startValue || props.startValue < 0) {
             setDis(true)
-        }else{
+        } else {
             setDis(false)
         }
     }
 
     return (
         <div className={styles.wrapper}>
-            <div>
-                <div>max value: <input className={props.maxValue < props.startValue ? styles.redMax : ''}
-                                       value={props.maxValue} type="number"
-                                       onChange={(e) => onChangeMaxHandler(e)}/></div>
-                <div>start value: <input className={props.startValue >= props.maxValue ? styles.redMin : ''}
-                                         value={props.startValue} type="number"
-                                         onChange={(e) => onChangeMinHandler(e)}/></div>
+            <div className={styles.twiceWrapper}>
+                <div>
+                    <div>max value: <input className={props.maxValue < props.startValue ? styles.redMax : ''}
+                                           value={props.maxValue} type="number"
+                                           onChange={(e) => onChangeMaxHandler(e)}/></div>
+                    <div>start value: <input className={props.startValue >= props.maxValue ? styles.redMin : ''}
+                                             value={props.startValue} type="number"
+                                             onChange={(e) => onChangeMinHandler(e)}/></div>
 
 
-            </div>
-            <div className={styles.buttons}>
-                <button disabled={dis} className={styles.button} onClick={setNumber}>Set</button>
+                </div>
+                <div className={styles.buttons}>
+                    <button disabled={dis} className={styles.button} onClick={setNumber}>Set</button>
+                </div>
             </div>
         </div>
     )

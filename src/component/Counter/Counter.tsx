@@ -10,6 +10,7 @@ type CounterPropsType = {
     incrementCount: () => void
     resetCounter: () => void
     maxCount: number
+    setRender: (value: boolean) => void
 }
 
 
@@ -24,6 +25,8 @@ export const Counter = (props: CounterPropsType) => {
             <div className={styles.buttons}>
                 <Button title={'inc'} callback={props.incrementCount} disable={props.count === props.maxCount}/>
                 <Button title={'reset'} callback={props.resetCounter} disable={props.count === props.startValue}/>
+                    <button disabled={props.maxCount < 0 || props.startValue < 0 || props.maxCount === props.startValue} className={styles.setterButton} onClick={()=>props.setRender(false)}>Set</button>
+
             </div>
         </div>
     )

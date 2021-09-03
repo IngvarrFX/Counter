@@ -22,7 +22,7 @@
 
 .buttons {
     margin: 20px 0 0 0;
-    border: 2px solid cornflowerblue;
+
     border-radius: 20px;
     padding: 20px;
     display: flex;
@@ -30,15 +30,28 @@
 }
 
 .wrapper {
+    position: relative;
     border: 2px solid cornflowerblue;
     border-radius: 20px;
     padding: 20px;
-    width: 400px;
+    min-width: 500px;
     color: #61dafb;
-    display: flex;
-    justify-content: space-between;
+
 }
 
-.wrapper div {
-    margin: 10px;
+
+
+.twiceWrapper{
+    position: center;
+    padding-left: 10px;
+    border: 2px solid cornflowerblue;
+    min-width: 450px;
+    min-height: 200px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.twiceWrapper input{
+    margin-bottom: 10px;
 }

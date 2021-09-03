@@ -14,6 +14,8 @@ function App() {
 
     let [counter, setCounter] = useState<number>(startValue)
 
+
+
     const incrementCount = () => {
         if (counter < maxValue) {
             setCounter(++counter)
@@ -29,24 +31,30 @@ function App() {
 
     }
 
+    let [render, setRender]=useState(true)
+
 
     return (
         <div className="App">
-            <Counter
-
-                startValue={startValue}
-                maxCount={maxValue}
-                count={counter}
-                incrementCount={incrementCount}
-                resetCounter={resetCounter}
-            />
-            <Setter
+            {render?
+                <Counter
+                    startValue={startValue}
+                    maxCount={maxValue}
+                    count={counter}
+                    incrementCount={incrementCount}
+                    resetCounter={resetCounter}
+                    setRender={setRender}
+                />
+                :
+                <Setter
                 setCounter={setCounter}
                 maxValue={max}
                 setMax={setMax}
                 startValue={min}
                 setMin={setMin}
-            />
+                setRender={setRender}
+                />
+            }
         </div>
     );
 }

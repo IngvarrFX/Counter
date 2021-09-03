@@ -5,7 +5,7 @@
     font-size: 50px;
     margin: 5px;
     background-color: #282c34;
-    border-radius: 10px;
+    border-radius: 20px;
     margin: auto;
     color: #61dafb;
     font-size: 80px;
@@ -18,7 +18,11 @@
     margin: 5px;
     color: red;
     font-size: 80px;
-    border-radius: 10px;
+    border-radius: 20px;
     font-weight: bold;
     margin: auto;
+}
+
+.errorMessage{
+    color: red;
 }
