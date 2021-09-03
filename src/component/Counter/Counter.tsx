@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from '../Button/Button';
+import {Buttons} from '../Button/Button';
 import {Display} from '../Display/Display';
 import styles from './Counter.module.css'
 
@@ -16,6 +16,11 @@ type CounterPropsType = {
 
 export const Counter = (props: CounterPropsType) => {
 
+
+    const setRenderHandler = () => {
+        props.setRender(false)
+    }
+
     return (
         <div className={styles.wrapper}>
             <Display
@@ -23,11 +28,13 @@ export const Counter = (props: CounterPropsType) => {
                 count={props.count}
             />
             <div className={styles.buttons}>
-                <Button title={'inc'} callback={props.incrementCount} disable={props.count === props.maxCount}/>
-                <Button title={'reset'} callback={props.resetCounter} disable={props.count === props.startValue}/>
-                    <button disabled={props.maxCount < 0 || props.startValue < 0 || props.maxCount === props.startValue} className={styles.setterButton} onClick={()=>props.setRender(false)}>Set</button>
+                <Buttons title={'inc'} callback={props.incrementCount} disable={props.maxCount === props.count}/>
+                <Buttons title={'reset'} callback={props.resetCounter} disable={props.count === props.startValue}/>
+                <Buttons title={'Set'} callback={setRenderHandler}/>
 
             </div>
         </div>
     )
 }
+
+//disabled={props.maxCount < 0 || props.startValue < 0 || props.maxCount === props.startValue} className={styles.setterButton} onClick={()=>props.setRender(false)}

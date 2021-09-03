@@ -5,6 +5,7 @@
     padding: 20px;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0 0 6px #00f;
 }
 
 .wrapper {
@@ -13,6 +14,7 @@
     padding: 20px;
     min-width: 500px;
     margin-bottom: 20px;
+    box-shadow: 0 0 6px #00f;
 }
 
 

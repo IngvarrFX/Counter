@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Input} from '../Input/Input';
-import {Button} from '../Button/Button';
+import {Buttons} from '../Button/Button';
 import styles from './Setter.module.css'
 
 
@@ -14,7 +14,7 @@ type SetterPropsType = {
 }
 
 export const Setter = (props: SetterPropsType) => {
-    let [dis, setDis] = useState(false)
+
 
     const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.setMax(Number(e.currentTarget.value))
@@ -31,29 +31,30 @@ export const Setter = (props: SetterPropsType) => {
         props.setRender(true)
     }
 
-    const disableToggle = () => {
-        if (props.maxValue < 0 || props.maxValue === props.startValue || props.startValue < 0) {
-            setDis(true)
-        } else {
-            setDis(false)
-        }
-    }
+
+    let dis = props.maxValue < 0
+        || props.maxValue === props.startValue
+        || props.startValue < 0
+        || props.maxValue < props.startValue
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.twiceWrapper}>
-                <div>
-                    <div>max value: <input className={props.maxValue < props.startValue ? styles.redMax : ''}
-                                           value={props.maxValue} type="number"
-                                           onChange={(e) => onChangeMaxHandler(e)}/></div>
-                    <div>start value: <input className={props.startValue >= props.maxValue ? styles.redMin : ''}
-                                             value={props.startValue} type="number"
-                                             onChange={(e) => onChangeMinHandler(e)}/></div>
-
-
+                <div className={styles.inputs}>
+                    <div>
+                        <Input value={props.maxValue} callback={onChangeMaxHandler} title={'Max value'}/>
+                    </div>
+                    <div>
+                        <Input value={props.startValue} callback={onChangeMinHandler}  title={'Min value'}/>
+                    </div>
                 </div>
+                {dis? <span className={styles.errorSpan} >Incorrect value!</span>: <span className={styles.span}>Set value</span>}
                 <div className={styles.buttons}>
-                    <button disabled={dis} className={styles.button} onClick={setNumber}>Set</button>
+                    <Buttons
+                        disable={dis}
+                        callback={setNumber}
+                        title={'Set'}
+                    />
                 </div>
             </div>
         </div>

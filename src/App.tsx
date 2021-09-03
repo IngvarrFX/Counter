@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from './component/Counter/Counter';
 import {Setter} from './component/Setter/Setter';
@@ -15,6 +15,34 @@ function App() {
     let [counter, setCounter] = useState<number>(startValue)
 
 
+    useEffect(() => {
+        let valueMaxString = localStorage.getItem('counterMaxValue')
+        if (valueMaxString) {
+            let newValue = JSON.parse(valueMaxString)
+            if (newValue > 0) {
+                setMax(newValue)
+            }
+        }
+    }, [])
+
+    useEffect(() => {
+        let valueMinString = localStorage.getItem('counterMinValue')
+        if (valueMinString) {
+            let newValue = JSON.parse(valueMinString)
+            if (newValue >= 0) {
+                setMin(newValue)
+                setCounter(newValue)
+            }
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('counterMaxValue', JSON.stringify(max))
+    }, [max])
+    useEffect(() => {
+        localStorage.setItem('counterMinValue', JSON.stringify(min))
+    }, [min])
+
 
     const incrementCount = () => {
         if (counter < maxValue) {
@@ -24,19 +52,14 @@ function App() {
 
     const resetCounter = () => {
         setCounter(startValue)
-
     }
 
-    const setInput = () => {
-
-    }
-
-    let [render, setRender]=useState(true)
+    let [render, setRender] = useState(true)
 
 
     return (
         <div className="App">
-            {render?
+            {render ?
                 <Counter
                     startValue={startValue}
                     maxCount={maxValue}
@@ -47,12 +70,12 @@ function App() {
                 />
                 :
                 <Setter
-                setCounter={setCounter}
-                maxValue={max}
-                setMax={setMax}
-                startValue={min}
-                setMin={setMin}
-                setRender={setRender}
+                    setCounter={setCounter}
+                    maxValue={max}
+                    setMax={setMax}
+                    startValue={min}
+                    setMin={setMin}
+                    setRender={setRender}
                 />
             }
         </div>
