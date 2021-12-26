@@ -1,14 +1,13 @@
 
 body {
-    background-color: #282c34;
+
 }
 
 .App {
-    width: 250px;
-    height: 500px;
-    margin: 40px auto;
-    background-color: #282c34;
-
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    margin: 100px auto;
 }
 
 

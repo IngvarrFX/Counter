@@ -1,52 +1,64 @@
-import React, {useState} from 'react';
-import './App.css';
-import {Counter} from './component/Counter/Counter';
-import {Setter} from './component/Setter/Setter';
+import React, {useEffect} from "react";
+import "./App.css";
+import {Counter} from "./component/Counter/Counter";
+import {Setter} from "./component/Setter/Setter";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "./bll/store";
+import {
+    countValueAC,
+    countValueTC,
+    InitialStateType,
+    setCountValueFromLocalStorageTC,
+    setMaxValueFromLocalStorageTC,
+    setMinValueFromLocalStorageTC
+} from "./bll/counter-reducer";
 
 
 function App() {
 
-    let [max, setMax] = useState<number>(5)
-    let [min, setMin] = useState<number>(0)
 
-    let maxValue = max
-    let startValue = min
+    const value = useSelector<AppStateType, InitialStateType>(state => state.counter)
+    let dispatch = useDispatch()
 
-    let [counter, setCounter] = useState<number>(startValue)
+    useEffect(() => {
+        dispatch(setCountValueFromLocalStorageTC())
+    }, [])
+
+    useEffect(() => {
+        dispatch(setMinValueFromLocalStorageTC())
+    }, [])
+
+    useEffect(() => {
+        dispatch(setMaxValueFromLocalStorageTC())
+    }, [])
 
     const incrementCount = () => {
-        if (counter < maxValue) {
-            setCounter(++counter)
+        if (value.count < value.maxValue) {
+            dispatch(countValueTC())
         }
     }
 
     const resetCounter = () => {
-        setCounter(startValue)
-
-    }
-
-    const setInput = () => {
-
+        dispatch(countValueAC(value.minValue))
     }
 
 
     return (
         <div className="App">
-            <Counter
-
-                startValue={startValue}
-                maxCount={maxValue}
-                count={counter}
-                incrementCount={incrementCount}
-                resetCounter={resetCounter}
-            />
-            <Setter
-                setCounter={setCounter}
-                maxValue={max}
-                setMax={setMax}
-                startValue={min}
-                setMin={setMin}
-            />
+            {value.render ?
+                <Counter
+                    startValue={value.minValue}
+                    maxCount={value.maxValue}
+                    count={value.count}
+                    incrementCount={incrementCount}
+                    resetCounter={resetCounter}
+                />
+                :
+                <Setter
+                    maxValue={value.maxValue}
+                    startValue={value.minValue}
+                />
+            }
         </div>
     );
 }

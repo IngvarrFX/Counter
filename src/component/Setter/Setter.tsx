@@ -1,57 +1,76 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, Dispatch} from "react";
 import {Input} from '../Input/Input';
-import {Button} from '../Button/Button';
+import {Buttons} from '../Button/Button';
 import styles from './Setter.module.css'
+import {useDispatch} from "react-redux";
+import {
+    ActionType,
+    countValueAC,
+    renderAC,
+    setMaxValueAC,
+    setMaxValueTC,
+    setMinValueAC, setMinValueTC
+} from "../../bll/counter-reducer";
 
 
 type SetterPropsType = {
     maxValue: number
-    setMax: (max: number) => void
+    // setMax: (max: number) => void
     startValue: number
-    setMin: (min: number) => void
-    setCounter: (value: number) => void
+    // setMin: (min: number) => void
+    // setCounter: (value: number) => void
+    //setRender: (value: boolean) => void
 }
 
-export const Setter = (props: SetterPropsType) => {
-    let [dis, setDis]= useState(false)
+export const Setter = React.memo((props: SetterPropsType) => {
+
+    let dispatch = useDispatch()
+
 
     const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setMax(Number(e.currentTarget.value))
+        // props.setMax(Number(e.currentTarget.value))
+        dispatch(setMaxValueTC(Number(e.currentTarget.value)))
     }
 
     const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setMin(Number(e.currentTarget.value))
-
+        // props.setMin(Number(e.currentTarget.value))
+        dispatch(setMinValueTC(Number(e.currentTarget.value)))
     }
 
     const setNumber = () => {
-        props.setMax(props.maxValue)
-        props.setCounter(props.startValue)
+        dispatch(setMaxValueTC(props.maxValue))
+        // props.setMax(props.maxValue)
+        dispatch(countValueAC(props.startValue))
+        //props.setRender(true)
+        dispatch(renderAC(true))
     }
 
-    const disableToggle = () => {
-        if(props.maxValue < 0 || props.maxValue === props.startValue || props.startValue < 0){
-            setDis(true)
-        }else{
-            setDis(false)
-        }
-    }
+
+    let dis = props.maxValue < 0
+        || props.maxValue === props.startValue
+        || props.startValue < 0
+        || props.maxValue < props.startValue
 
     return (
         <div className={styles.wrapper}>
-            <div>
-                <div>max value: <input className={props.maxValue < props.startValue ? styles.redMax : ''}
-                                       value={props.maxValue} type="number"
-                                       onChange={(e) => onChangeMaxHandler(e)}/></div>
-                <div>start value: <input className={props.startValue >= props.maxValue ? styles.redMin : ''}
-                                         value={props.startValue} type="number"
-                                         onChange={(e) => onChangeMinHandler(e)}/></div>
-
-
-            </div>
-            <div className={styles.buttons}>
-                <button disabled={dis} className={styles.button} onClick={setNumber}>Set</button>
+            <div className={styles.twiceWrapper}>
+                <div className={styles.inputs}>
+                    <div>
+                        <Input value={props.maxValue} callback={onChangeMaxHandler} title={'Max value'}/>
+                    </div>
+                    <div>
+                        <Input value={props.startValue} callback={onChangeMinHandler}  title={'Min value'}/>
+                    </div>
+                </div>
+                {dis? <span className={styles.errorSpan} >Incorrect value!</span>: <span className={styles.span}>Set value</span>}
+                <div className={styles.buttons}>
+                    <Buttons
+                        disable={dis}
+                        callback={setNumber}
+                        title={'Set'}
+                    />
+                </div>
             </div>
         </div>
     )
-}
+})

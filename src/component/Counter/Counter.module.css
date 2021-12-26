@@ -5,12 +5,28 @@
     padding: 20px;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0 0 6px #00f;
 }
 
 .wrapper {
     border: 2px solid cornflowerblue;
     border-radius: 20px;
     padding: 20px;
-    width: 400px;
+    min-width: 500px;
     margin-bottom: 20px;
+    box-shadow: 0 0 6px #00f;
+}
+
+
+.setterButton {
+    background-color: #61dafb;
+    color: #282c34;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    font-size: 30px;
+}
+
+.setterButton:disabled {
+    opacity: 0.5;
 }

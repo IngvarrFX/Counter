@@ -7,10 +7,10 @@ type DisplayPropsType = {
 }
 
 
-export const Display = (props: DisplayPropsType) => {
+export const Display =React.memo ((props: DisplayPropsType) => {
     return (
         <div className={props.count === props.maxCount ? styles.displayRed : styles.display}>
             {props.count}
         </div>
     )
-}
+})
