@@ -98,45 +98,30 @@ export const setCountValueFromLocalStorageTC = () => (dispatch: Dispatch<ActionT
 }
 
 
-
-
-
-
-
-
-
-
 export const setMinValueTC = (minValue: number) => (dispatch: Dispatch<ActionType>) => {
     localStorage.setItem("minValue", JSON.stringify(minValue))
     dispatch(setMinValueAC(minValue))
 }
-export const setMinValueFromLocalStorageTC = () => (dispatch: Dispatch<ActionType>)=> {
+export const setMinValueFromLocalStorageTC = () => (dispatch: Dispatch<ActionType>) => {
     let minValueString = localStorage.getItem("minValue")
-    if(minValueString){
-        let newValue  = JSON.parse(minValueString)
-        if(newValue> 0){
+    if (minValueString) {
+        let newValue = JSON.parse(minValueString)
+        if (newValue > 0) {
             dispatch(setMinValueAC(newValue))
         }
     }
 }
 
 
-
-
-
-
-
-
-
 export const setMaxValueTC = (maxValue: number) => (dispatch: Dispatch<ActionType>) => {
     localStorage.setItem("maxValue", JSON.stringify(maxValue))
     dispatch(setMaxValueAC(maxValue))
 }
-export const setMaxValueFromLocalStorageTC = () => (dispatch: Dispatch<ActionType>)=> {
-    let maxValueString = localStorage.getItem('maxValue')
-    if(maxValueString){
-        let newValue  = JSON.parse(maxValueString)
-        if(newValue> 0){
+export const setMaxValueFromLocalStorageTC = () => (dispatch: Dispatch<ActionType>) => {
+    let maxValueString = localStorage.getItem("maxValue")
+    if (maxValueString) {
+        let newValue = JSON.parse(maxValueString)
+        if (newValue > 0) {
             dispatch(setMaxValueAC(newValue))
         }
     }

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useCallback, useEffect} from "react";
 import "./App.css";
 import {Counter} from "./component/Counter/Counter";
 import {Setter} from "./component/Setter/Setter";
@@ -16,7 +16,6 @@ import {
 
 function App() {
 
-
     const value = useSelector<AppStateType, InitialStateType>(state => state.counter)
     let dispatch = useDispatch()
 
@@ -32,15 +31,15 @@ function App() {
         dispatch(setMaxValueFromLocalStorageTC())
     }, [])
 
-    const incrementCount = () => {
+    const incrementCount = useCallback(() => {
         if (value.count < value.maxValue) {
             dispatch(countValueTC())
         }
-    }
+    }, [dispatch, countValueTC])
 
-    const resetCounter = () => {
+    const resetCounter = useCallback(() => {
         dispatch(countValueAC(value.minValue))
-    }
+    }, [dispatch, countValueAC])
 
 
     return (

@@ -1,8 +1,7 @@
 import {counterReducer} from "./counter-reducer";
-import {createStore,combineReducers} from "redux";
+import {createStore, combineReducers} from "redux";
 import {applyMiddleware} from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-
 
 
 const rootReducer = combineReducers({
@@ -11,6 +10,6 @@ const rootReducer = combineReducers({
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
-export const store = createStore(rootReducer,applyMiddleware(thunk))
+export const store = createStore(rootReducer, applyMiddleware(thunk))
 
 type AppStoreType = typeof store

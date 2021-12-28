@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './Display.module.css'
+import React from "react";
+import styles from "./Display.module.css"
 
 type DisplayPropsType = {
     count: number
@@ -7,7 +7,7 @@ type DisplayPropsType = {
 }
 
 
-export const Display =React.memo ((props: DisplayPropsType) => {
+export const Display = React.memo((props: DisplayPropsType) => {
     return (
         <div className={props.count === props.maxCount ? styles.displayRed : styles.display}>
             {props.count}
